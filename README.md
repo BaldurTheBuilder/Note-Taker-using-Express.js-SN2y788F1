@@ -11,6 +11,7 @@ This program is an experiment in Express.js. The program allows users to keep tr
 Clone the github repository.
 ## Usage
 To take a new note, click the plus sign in the top right, then write a title and the note body in the right column fields. Then, save the note by clicking on the floppy disk in the top-right. View saved notes by clicking on them in the left column. Currently notes cannot be deleted.
+deployed app: https://fierce-savannah-54912.herokuapp.com/
 ![alt text](/images/pagePreview.png)
 ## Credits
 N/A
