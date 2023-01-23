@@ -1,4 +1,5 @@
 const express = require('express');
+const utilities = require('./helpers/fsUtils');
 const path = require('path');
 const PORT = 3001;
 const app = express();
@@ -27,33 +28,33 @@ app.get('/api/notes', (req, res) => {
     res.sendFile(path.join(__dirname, '/db/db.json'));
 });
 
-
-//this is optional
-app.delete(`/api/notes/`)
-/*
-reference code from index.js:
-
-const deleteNote = (id) =>
-  fetch(`/api/notes/${id}`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-*/
-
-
-// WHEN I enter a new note title and the note’s text
-// THEN a Save icon appears in the navigation at the top of the page
-
 // WHEN I click on the Save icon
 // THEN the new note I have entered is saved and appears in the left-hand column with the other existing notes
+app.post('/api/notes',(req,res) => {
+    console.info(`${req.method} request received to post on the note page`);
+    if(req.body.title && req.body.text) {
+        utilities.readAndAppend(req.body, './db/db.json');
+        const response = {
+            status: 'success',
+            body: req.body,
+        };
+        console.log(response);
+        res.status(201).json(response);
+    }
+    else {
+        res.status(500).json('error in posting')
+    };
+})
+
+//this is optional
+app.delete(`/api/notes/:id`, (req,res) => {
+    console.info(`${req.method} request received to delete on the note page`);
+    //we would have to review the notes and figure out which one the user wants to delete.
+    //based on the deleteNote function in index.html, it looks like we assign an id to each note.
+})
 
 // WHEN I click on an existing note in the list in the left-hand column
 // THEN that note appears in the right-hand column
-
-// WHEN I click on the Write icon in the navigation at the top of the page
-// THEN I am presented with empty fields to enter a new note title and the note’s text in the right-hand column
 
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT} 🚀`)

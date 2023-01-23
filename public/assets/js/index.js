@@ -102,12 +102,16 @@ const handleNoteView = (e) => {
   renderActiveNote();
 };
 
+// WHEN I click on the Write icon in the navigation at the top of the page
+// THEN I am presented with empty fields to enter a new note title and the note’s text in the right-hand column
 // Sets the activeNote to and empty object and allows the user to enter a new note
 const handleNewNoteView = (e) => {
   activeNote = {};
   renderActiveNote();
 };
 
+// WHEN I enter a new note title and the note’s text
+// THEN a Save icon appears in the navigation at the top of the page
 const handleRenderSaveBtn = () => {
   if (!noteTitle.value.trim() || !noteText.value.trim()) {
     hide(saveNoteBtn);
