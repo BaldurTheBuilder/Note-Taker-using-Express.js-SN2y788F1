@@ -54,7 +54,12 @@ app.post('/api/notes',(req,res) => {
     else {
         res.status(500).json('error in posting')
     };
-})
+});
+
+app.get('*', (req, res) => {
+    console.info(`${req.method} request received for something we didn't set up`);
+    res.sendFile(path.join(__dirname, '/public/notes.html'));
+});
 
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT} 🚀`)
